@@ -1,10 +1,12 @@
+import base64
+import json
 import logging
 from datetime import datetime, timezone
 from pathlib import Path
 
 import joblib
 import pandas as pd
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from google.cloud import bigquery
 from pydantic import BaseModel, Field
 
@@ -54,3 +56,10 @@ def predict(m: Metrics):
         logger.exception("BigQuery insert failed")
 
     return {"is_anomaly": is_anomaly, "anomaly_score": round(score, 4)}
+
+
+@app.post("/pubsub")
+async def pubsub_push(request: Request):
+    envelope = await request.json()
+    data = json.loads(base64.b64decode(envelope["message"]["data"]))
+    return predict(Metrics(**data))
