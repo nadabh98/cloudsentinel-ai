@@ -3,3 +3,9 @@ data.csv
 __pycache__
 *.pyc
 .env
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfstate
+*.tfstate.*
