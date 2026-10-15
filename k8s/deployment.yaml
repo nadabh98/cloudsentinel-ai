@@ -12,6 +12,7 @@ spec:
       labels:
         app: cloudsentinel-api
     spec:
+      serviceAccountName: cs-api
       containers:
         - name: api
           image: europe-west9-docker.pkg.dev/cloudsentinel-ai-511522/cloud-run-source-deploy/cloudsentinel-api@sha256:b9c78bf680302546c7f96d4f2c6b42d42e76f9e93871a864b5455e86c3001cb7
