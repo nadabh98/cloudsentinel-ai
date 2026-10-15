@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudsentinel-api
+spec:
+  type: LoadBalancer
+  selector:
+    app: cloudsentinel-api
+  ports:
+    - port: 80
+      targetPort: 8080
